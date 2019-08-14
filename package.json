@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "supervisor app.js"
+    "start": "ts-node app.js",
+    "dev": "nodemon --watch src -e ts,tsx,js --exec ts-node app.ts",
+    "eslint": "eslint --ext=.js,.jsx,.ts,.tsx ."
   },
   "author": "",
   "license": "ISC",
@@ -23,8 +24,22 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@types/koa": "^2.0.49",
+    "@types/koa-router": "^7.0.42",
+    "@types/request-promise": "^4.1.44",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
     "koa-webpack-hot-middleware": "^1.0.3",
+    "nodemon": "^1.19.1",
     "supervisor": "^0.12.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3",
     "webpack": "^4.32.2"
   }
 }
