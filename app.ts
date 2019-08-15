@@ -1,8 +1,9 @@
 import * as Koa from 'koa'
+import middleware from './src/middlewares'
+import router from './src/routes'
+import { initUtil } from './src/util'
+
 const app = new Koa()
-const router = require('./src/routes')
-const { initUtil } = require('./src/util')
-const middleware = require("./src/middlewares")
 // 挂载工具方法到app上
 initUtil(app)
 // 中间件
@@ -25,6 +26,6 @@ app.on('error', async (err, ctx) => {
     result: 0,
     error: err.message
   }
-});
+})
 
 console.log(`the server is starting at port ${process.env.PORT || '3000'}`)

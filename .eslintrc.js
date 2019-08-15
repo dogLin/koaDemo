@@ -23,6 +23,7 @@ module.exports = {
     ],
     rules: {
         indent: 'off',
+        "require-atomic-updates": "off",
         "camelcase": 'off',
         '@typescript-eslint/indent': [
           'error',

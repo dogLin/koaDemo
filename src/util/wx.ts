@@ -4,7 +4,7 @@ import * as crypto from 'crypto'
 // import md5 from 'md5'
 import config from '../../config'
 const { appid, secret } = config.wx
-module.exports = {
+export default {
   login: async function (js_code: string, fullUserInfo): Promise<{}> {
     const res = await rp({
       uri: 'https://api.weixin.qq.com/sns/jscode2session',

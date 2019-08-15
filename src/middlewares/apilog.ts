@@ -1,5 +1,6 @@
 
-import { Request, Response } from 'koa'
+import { Response } from 'koa'
+import { Request } from 'koa-bodyparser'
 function reqParse (req: Request): object {
   const { method, query, body, url } = req
   return {

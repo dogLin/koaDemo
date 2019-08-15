@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken'
 import Config from '../../config'
 
-module.exports = {
+export default {
   async create (userInfo: object): Promise<string> {
     return jwt.sign(userInfo, Config.jwt.secret)
   },
