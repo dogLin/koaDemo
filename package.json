@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node app.js",
-    "dev": "nodemon --watch src -e ts,tsx,js --exec ts-node app.ts",
+    "dev": "nodemon --watch ./app.ts --watch src --watch ./config.ts -e ts,tsx,js --exec ts-node app.ts",
     "eslint": "eslint --ext=.js,.jsx,.ts,.tsx ."
   },
   "author": "",

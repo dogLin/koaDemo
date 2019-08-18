@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2017",
+        "target": "es5",
         // "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
         "outDir": "dist",  // TS文件编译后会放入到此文件夹内
         "baseUrl": ".",
+        "experimentalDecorators": true, // 支持装饰器
         "paths": {
             "*": [
                 "node_modules/*",
@@ -16,6 +17,6 @@
     },
     "include": [
         "src/**/*",
-        "app.ts"
+        "app.ts",
     ]
   }
