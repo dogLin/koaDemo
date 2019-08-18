@@ -8,5 +8,13 @@ export default {
   },
   jwt: {
     secret: 'time_mana_20190501'
+  },
+  mysql: {
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'time_mana'
+  },
+  rsa: {
   }
 }
