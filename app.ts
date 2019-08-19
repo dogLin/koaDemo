@@ -3,10 +3,10 @@ import middleware from './src/middlewares'
 import router from './src/routes'
 import { initUtil } from './src/util'
 import { MyApplication } from './src/types/koaExtends'
-import './src/controllers/testController'
+// import './src/controllers/testController'
 // const a = new TestController()
+import { registryRouter } from './src/decorator/route'
 // require('./src/controllers/testController')
-import * as DecoratorRouter from './src/decorator/route'
 const app = new Koa()
 // 挂载工具方法到app上
 initUtil(app)
@@ -15,7 +15,7 @@ middleware(app)
 // 路由注册
 router(app)
 
-DecoratorRouter.registryRouter(app as MyApplication)
+registryRouter(app as MyApplication)
 app.use(async (ctx) => {
   ctx.status = 404
   ctx.body = {
