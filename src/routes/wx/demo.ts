@@ -1,6 +1,5 @@
 import * as Router from 'koa-router'
-import { Request } from 'koa-bodyparser'
-import { MyApplication } from '../../types/koaExtends'
+import { MyApplication, Request } from '../../types/koaExtends'
 const userRouter = new Router()
 
 userRouter.post('/login', async (ctx) => {

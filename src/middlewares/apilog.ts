@@ -1,6 +1,8 @@
 
-import { Response } from 'koa'
-import { Request } from 'koa-bodyparser'
+import { Response, Request as KoaRequest } from 'koa'
+declare interface Request extends KoaRequest {
+  body: any;
+}
 function reqParse (req: Request): object {
   const { method, query, body, url } = req
   return {

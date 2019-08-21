@@ -12,15 +12,17 @@ function route (conf: object): (target, name, descriptor) => void {
   }
 }
 
+type DecoratorFun = (target, name, descriptor) => void | any
+
 interface RouterMethods {
-  get: (path) => ((target, name, descriptor) => void) | any;
-  post: (path) => ((target, name, descriptor) => void) | any;
-  del: (path) => ((target, name, descriptor) => void) | any;
-  put: (path) => ((target, name, descriptor) => void) | any;
-  options: (path) => ((target, name, descriptor) => void) | any;
-  head: (path) => ((target, name, descriptor) => void) | any;
-  patch: (path) => ((target, name, descriptor) => void) | any;
-  all: (path) => ((target, name, descriptor) => void) | any;
+  get: (path) => DecoratorFun | any;
+  post: (path) => DecoratorFun | any;
+  del: (path) => DecoratorFun | any;
+  put: (path) => DecoratorFun | any;
+  options: (path) => DecoratorFun | any;
+  head: (path) => DecoratorFun | any;
+  patch: (path) => DecoratorFun | any;
+  all: (path) => DecoratorFun | any;
 }
 const methods: RouterMethods = {
   get: (path) => {},
@@ -34,19 +36,35 @@ const methods: RouterMethods = {
 }
 
 AllMethods.forEach(method => {
-  methods[method] = (path: string): (target, name, descriptor) => void => route({ method, path: path[0] === '/' ? path : '/' + path })
+  methods[method] = (path: string): DecoratorFun => route({ method, path: path[0] === '/' ? path : '/' + path })
 })
 
 function registryRouter (app: MyApplication): void {
   glob.sync('*Controller.ts', { cwd: './src/controllers', matchBase: true, realpath: true }).forEach(require)
-  routerMap.forEach((fun, conf) => {
+  routerMap.forEach((funs, conf) => {
     if (decoratorRouter[conf.method]) {
       console.log(conf.target)
-      const prefix = conf.target._prefix || ''
-      decoratorRouter[conf.method](prefix + conf.path, fun)
+      const prefix = conf.target._prefix || conf.target.prototype._prefix || ''
+      decoratorRouter[conf.method](prefix + conf.path, ...toArry(funs))
     }
   })
   app.use(decoratorRouter.routes()).use(decoratorRouter.allowedMethods())
+}
+export const controller = (prefix: string) => {
+  return (constructor): any => {
+    constructor.prototype._prefix = prefix
+  }
+}
+
+function toArry (arr): any[] {
+  return arr instanceof Array ? arr : [arr]
+}
+
+export const middlewares = (...mids): DecoratorFun => {
+  return (target, name): void => {
+    target[name] = toArry(target[name])
+    target[name].unshift(...mids)
+  }
 }
 
 export {
