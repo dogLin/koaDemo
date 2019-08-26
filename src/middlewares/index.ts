@@ -4,7 +4,7 @@ import * as bodyParser from 'koa-bodyparser'
 
 export default (app): void => {
   app.use(bodyParser())
-  app.use(apilog())
+  // app.use(apilog())
 }
 
 export { apilog, testMid }

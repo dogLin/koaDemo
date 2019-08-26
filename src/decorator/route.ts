@@ -6,7 +6,6 @@ const decoratorRouter = new Router()
 const AllMethods = ['get', 'post', 'del', 'put', 'options', 'head', 'patch', 'all']
 const routerMap = new Map()
 function route (conf: object): (target, name, descriptor) => void {
-  console.log(conf)
   return function (target, name, descriptor): void {
     routerMap.set({ ...conf, target }, target[name])
   }
@@ -43,7 +42,6 @@ function registryRouter (app: MyApplication): void {
   glob.sync('*Controller.ts', { cwd: './src/controllers', matchBase: true, realpath: true }).forEach(require)
   routerMap.forEach((funs, conf) => {
     if (decoratorRouter[conf.method]) {
-      console.log(conf.target)
       const prefix = conf.target._prefix || conf.target.prototype._prefix || ''
       decoratorRouter[conf.method](prefix + conf.path, ...toArry(funs))
     }

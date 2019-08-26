@@ -41,17 +41,17 @@ export default {
    * @param iv
    * @returns {Promise.<string>}
    */
-  async decryptUserInfoData (sessionKey: string, encryptedData: string | Buffer, iv: string | Buffer): Promise<{}> {
+  async decryptUserInfoData (sessionKey: string, encryptedData: string, iv: string | Buffer): Promise<{}> {
     let decoded = ''
     try {
       const _sessionKey = Buffer.from(sessionKey, 'base64')
-      encryptedData = Buffer.from(encryptedData as string, 'base64')
+      const encryptedData2 = Buffer.from(encryptedData, 'base64')
       iv = Buffer.from(iv as string, 'base64')
       // 解密
       const decipher = crypto.createDecipheriv('aes-128-cbc', _sessionKey, iv)
       // 设置自动 padding 为 true，删除填充补位
       decipher.setAutoPadding(true)
-      decoded = decipher.update(encryptedData.toString(), 'binary', 'utf8')
+      decoded = decipher.update(encryptedData2.toString('binary'), 'binary', 'utf8')
       decoded += decipher.final('utf8')
       const userInfo = JSON.parse(decoded)
       if (userInfo.watermark.appid !== config.wx.appid) {
@@ -60,6 +60,7 @@ export default {
 
       return userInfo
     } catch (err) {
+      console.log(err)
       return null
     }
   }
