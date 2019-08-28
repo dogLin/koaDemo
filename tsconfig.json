@@ -8,6 +8,7 @@
         "outDir": "dist",  // TS文件编译后会放入到此文件夹内
         "baseUrl": ".",
         "experimentalDecorators": true, // 支持装饰器
+        "emitDecoratorMetadata": true,
         "paths": {
             "*": [
                 "node_modules/*",
