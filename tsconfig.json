@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es5",
+        "target": "es6",
         // "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
         "outDir": "dist",  // TS文件编译后会放入到此文件夹内
         "baseUrl": ".",
         "experimentalDecorators": true, // 支持装饰器
+        "emitDecoratorMetadata": true,
         "paths": {
             "*": [
                 "node_modules/*",

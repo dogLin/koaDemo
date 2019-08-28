@@ -11,9 +11,9 @@ export default {
   },
   mysql: {
     host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'time_mana'
+    user: 'doglin',
+    password: '123456',
+    database: 'time_master'
   },
   rsa: {
   }
