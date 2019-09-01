@@ -1,12 +1,12 @@
 // const jwt = require('jsonwebtoken')
-import jwt from 'jsonwebtoken'
+import * as jwt from 'jsonwebtoken'
 import Config from '../../config'
 
 export default {
-  async create (userInfo: object): Promise<string> {
+  create (userInfo: object): string {
     return jwt.sign(userInfo, Config.jwt.secret)
   },
-  async parse (token: string): Promise<object> {
+  parse (token: string): string | object {
     return jwt.verify(token, Config.jwt.secret)
   }
 }
