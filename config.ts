@@ -16,5 +16,6 @@ export default {
     database: 'time_master'
   },
   rsa: {
-  }
+  },
+  token_header: 'time_token'
 }

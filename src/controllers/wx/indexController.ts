@@ -19,8 +19,7 @@ export default class TestController {
       await user.save()
     }
     const token = app.$util.token.create({ id: user.id, wxOpenId: user.wxOpenId })
-    const { pwd, wxOpenId, ...resUser } = user
-    console.log(resUser)
-    ctx.body = { result: 1, data: { user: resUser, token } }
+    const { pwd, wxOpenId, ...resUser } = (user.toJSON() as any)
+    ctx.body = { result: 1, data: { token, user: resUser } }
   }
 }
