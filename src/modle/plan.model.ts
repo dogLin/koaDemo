@@ -12,10 +12,10 @@ export default class Plan extends BaseModel<Plan> {
   total: number;
 
   @Column
-  begindate: number;
+  beginDate: number;
 
   @Column
-  enddate: number;
+  endDate: number;
 
   @Column
   supervise: number; // 监督金
