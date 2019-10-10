@@ -10,9 +10,9 @@ export default {
     secret: 'time_mana_20190501'
   },
   mysql: {
-    host: 'localhost',
-    user: 'doglin',
-    password: '123456',
+    host: '34.92.238.62',
+    user: 'time_master',
+    password: 'master_time',
     database: 'time_master'
   },
   rsa: {

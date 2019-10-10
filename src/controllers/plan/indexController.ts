@@ -19,11 +19,36 @@ export default class TestController {
 
   @router.post('')
   public async createPlans (ctx: MyContext): Promise<void> {
+    console.log(ctx.request.body)
     const plan = new Plan({
       ...ctx.request.body,
-      userid: ctx.state.user.id
+      userId: ctx.state.user.id
     })
     await plan.save()
     ctx.body = { result: 1, data: { plan } }
+  }
+
+  @router.put('/:id')
+  public async updatePlan (ctx: MyContext): Promise<void> {
+    const id = ctx.params.id
+    if (!id) {
+      ctx.throw(400)
+    }
+    const res = await Plan.update({
+      ...ctx.request.body
+    }, { where: { id } })
+    ctx.body = { result: 1, data: { res } }
+  }
+
+  @router.del('/:id')
+  public async deletePlan (ctx: MyContext): Promise<void> {
+    const id = ctx.params.id
+    if (!id) {
+      ctx.throw(400)
+    }
+    const res = await Plan.destroy({
+      where: { id }
+    })
+    ctx.body = { result: 1, data: { res } }
   }
 }
